@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Principal</title>
+    <link href="assets/css/bootstrap-reboot.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-grid.min.css" rel="stylesheet">
+    <link href="assets/css/footer-with-logo.css" rel="stylesheet">
+    <script type="text/javascript">
+    	var abc = " ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    	var letra = ""; 
+    	var posLetra = 0; 
+    	var frase = "";
+    	var res = ""; 
+    	function cript() { 
+    		frase = document.getElementById('frase').value.toUpperCase();
+    		var chave = parseInt(document.getElementById('chave').value); 
+    		for (var i = 0; i < frase.length; i++) {
+    			letra = frase.charAt(i); 
+    			posLetra = parseInt(abc.indexOf(letra)); 
+    			if (posLetra == 0) { 
+    				res += " ";
+    			} else if (posLetra == -1) { 
+    				res += letra; 
+    			} else {
+    				if ((posLetra + chave) > 26) { 
+    					res += abc.charAt(0 + ((posLetra + chave) - 26)); 
+    				} else {
+    					res += abc.charAt(posLetra + chave); 
+    				}
+    			}
+    		}
+			alert(res); //exibe o resultado
+    	}
+    	//tem um funcionamento semelhante a anterior
+    	function decript() {
+    		frase = document.getElementById('frase').value.toUpperCase();
+    		var chave = parseInt(document.getElementById('chave').value);
+    		for (var i = 0; i < frase.length; i++) {
+    			letra = frase.charAt(i);
+    			posLetra = parseInt(abc.indexOf(letra));
+    			if (posLetra == 0) {
+    				res += " ";
+    			} else if (posLetra == -1) {
+    				res += letra;
+    			} else {
+    				if ((posLetra - chave) <= 0) { //se a chave jogar para uma letra antes do "a"
+    					res += abc.charAt(26 - Math.abs(posLetra - chave)); //recebe a letra correspondente a z - o valor que esta ultrapassando
+    				} else {
+    					res += abc.charAt(posLetra - chave); //senao recebe a letra criptografada - a chave
+    				}
+    			}
+    		}
+			alert(res);
+    	}
+    </script>
+    
+
+</head>
+
+<body background="fundo.jpg">
+		<div class="container text-light" style="width: 100%; height: 100%; font-family: times;">
+			<div class="row justify-content-md-center align-items-center">
+				<div class="col-md-6 border border-info p-5 mt-5 rounded" style="background-color: rgba(23, 162, 184, 0.8);">
+					<h1 class="text-center">Cifra de Cesar</h1>
+					<form class="form-group" id="frmcc" name="frmcc" action="#">
+						<label class="h4">Frase:</label><br>
+						<textarea class="form-control" name="frase" id="frase" rows="5" style="text-transform: uppercase;"></textarea><br>
+						<label class="h4">Chave:</label><br>
+						<input type="number" name="chave" id="chave" class="form-control" value="3" min="0" max="26">
+						<button type="submit" name="btn-c" type="btn-c" class="btn btn-outline-light mt-5" onclick="cript()">Criptografar</button>
+						<button type="submit" name="btn-d" type="btn-c" class="btn btn-outline-light mt-5" style="margin-left: 227px;"  onclick="decript()">Desriptografar</button>
+					</form> 
+				</div>
+			</div>
+		</div>
+
+	<script src="assets/js/jquery-3.4.1.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+</body>
+</html>
